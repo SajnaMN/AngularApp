@@ -1,0 +1,123 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Add Time Sheet</h1>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-2">
+                <label class="label_cntrl">Select Employee</label>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" name="employeelist" [(ngModel)]="employeeId" id="employeelist" (change)="GetEmployeeTaskDetails()">
+                    <option [ngValue]="0">-Select-</option>
+                    <option *ngFor="let c of employeeList" [ngValue]="c.id">{{c.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button (click)="AddNewTask()">+</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center; font-size: 25px">
+                <label class="label_cntrl"><b>Week</b></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table" style="width:80%">
+                    <tr>
+                        <th>Task Name</th>
+                        <!-- <th>sunday</th>
+                        <th>monday</th>
+                        <th>tuesday</th>
+                        <th>wednesday</th>
+                        <th>thursday</th>
+                        <th>friday</th>
+                        <th>saturday</th> -->
+                        <th *ngFor="let row of empTaskDatesModel; let i = index;">{{row.dayName}}</th>
+                    </tr>
+                    <tr *ngFor="let row of employeeTaskDetails">
+                        <td>{{row.taskName}}</td>
+                        <td>{{row.sunday ? (row.sunday | number:null) : 0 }}</td>
+                        <td>{{row.monday ? (row.monday | number:null) : 0 }}</td>
+                        <td>{{row.tuesday ? (row.tuesday | number:null) : 0 }}</td>
+                        <td>{{row.wednesday ? (row.wednesday | number:null) : 0 }}</td>
+                        <td>{{row.thursday ? (row.thursday | number:null) : 0 }}</td>
+                        <td>{{row.friday ? (row.friday | number:null) : 0 }}</td>
+                        <td>{{row.saturday ? (row.saturday | number:null) : 0 }}</td>
+                    </tr>
+                    <tr *ngFor="let row of employeeTaskDetailsNew; let i = index;">
+                        <td><select class="form-control" id="TaskList{{i}}" name="TaskList{{i}}"
+                                [(ngModel)]="row.taskId">
+                                <option [ngValue]="0">-Select-</option>
+                                <option *ngFor="let c of taskList" [ngValue]="c.id">{{c.name}}</option>
+                            </select></td>
+                        <td>
+                            <input type="text" class="form-control" id="Sunday{{i}}"
+                                name="Sunday{{i}}" [(ngModel)]="row.sunday" (blur)="CalculateSum()">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" id="Monday{{i}}"
+                                name="Monday{{i}}" [(ngModel)]="row.monday" (blur)="CalculateSum()">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" id="Tuesday{{i}}"
+                                name="Tuesday{{i}}" [(ngModel)]="row.tuesday" (blur)="CalculateSum()">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" id="Wednesday{{i}}"
+                                name="Wednesday{{i}}" [(ngModel)]="row.wednesday" (blur)="CalculateSum()">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" id="Thursday{{i}}"
+                                name="Thursday{{i}}" [(ngModel)]="row.thursday" (blur)="CalculateSum()">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" id="Friday{{i}}"
+                                name="Friday{{i}}" [(ngModel)]="row.friday" (blur)="CalculateSum()">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" id="Saturday{{i}}"
+                                name="Saturday{{i}}" [(ngModel)]="row.saturday" (blur)="CalculateSum()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <th>
+                            {{Sunday}}
+                        </th>
+                        <th>
+                            {{Monday}}
+                        </th>
+                        <th>
+                            {{Tuesday}}
+                        </th>
+                        <th>
+                            {{Wednesday}}
+                        </th>
+                        <th>
+                            {{Thursday}}
+                        </th>
+                        <th>
+                            {{Friday}}
+                        </th>
+                        <th>
+                            {{Saturday}}
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary" (click)="BackToList()">Back to list</button> &nbsp;&nbsp;
+                <button class="btn btn-primary" (click)="SaveTaskDetails()">Save</button></div>
+        </div>
+
+    </div>
+</div>
